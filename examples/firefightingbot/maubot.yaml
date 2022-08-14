@@ -1,0 +1,7 @@
+#id: xyz.ohea.firefightingbot
+id: xyz.ohea.firefightingbot
+version: 0.1.0
+license: AGPL-3.0-or-later
+modules:
+- firefightingbot 
+main_class: FireFightingBot

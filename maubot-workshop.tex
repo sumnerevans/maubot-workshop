@@ -1,0 +1,162 @@
+\documentclass{acm}
+
+\usepackage{fontawesome}
+\usepackage{etoolbox}
+\usepackage{textcomp}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{attrib}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage[linesnumbered,commentsnumbered,ruled,vlined]{algorithm2e}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
+\SetCommentSty{mycommfont}
+\SetKwComment{tcc}{ \# }{}
+\SetKwComment{tcp}{ \# }{}
+
+\usepackage{siunitx}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing,calc,arrows.meta,shapes,graphs}
+
+\AtBeginEnvironment{minted}{\singlespacing\fontsize{10}{10}\selectfont}
+\setmainfont{Open Sans Light}
+\usefonttheme{serif}
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+\makeatother
+
+% Math stuffs
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\lcm}{\text{lcm}}
+\newcommand{\Inn}{\text{Inn}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Ker}{\text{Ker}\ }
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newcommand{\yournewcommand}[2]{Something #1, and #2}
+
+\newenvironment{question}[1]{\par\textbf{Question #1.}\par}{}
+
+\newcommand{\pmidg}[1]{\parbox{\widthof{#1}}{#1}}
+\newcommand{\splitslide}[4]{
+    \noindent
+    \begin{minipage}{#1 \textwidth - #2 }
+        #3
+    \end{minipage}%
+    \hspace{ \dimexpr #2 * 2 \relax }%
+    \begin{minipage}{\textwidth - #1 \textwidth - #2 }
+        #4
+    \end{minipage}
+}
+
+\newcommand{\frameoutput}[1]{\frame{\colorbox{white}{#1}}}
+
+\newcommand{\tikzmark}[1]{%
+\tikz[baseline=-0.55ex,overlay,remember picture] \node[inner sep=0pt,] (#1)
+{\vphantom{T}};
+}
+
+\newcommand{\braced}[3]{%
+    \begin{tikzpicture}[overlay,remember picture]
+        \draw [thick,decorate,decoration={brace,raise=1ex,amplitude=4pt},blue] (#2.south west-|T1.south west) -- node[anchor=west,left,xshift=-1.8ex,text=olive]{#3} (#1.north west-|T1.south west);
+    \end{tikzpicture}
+}
+
+\title{Maubot Workshop}
+\author{Sumner Evans}
+\institute{Beeper}
+\date{March 1, 2022}
+
+\begin{document}
+
+\begin{frame}{What is Maubot?}
+    Maubot is a \textbf{plugin-based} Matrix bot system built on top of the
+    \textbf{Mautrix} library. Both libraries were created by Tulir (one of my
+    coworkers).
+
+    \pause
+    Because it's plugin-based, you run a single maubot instance, and then use an
+    \textit{admin panel} to upload and instantiate plugins.
+
+    \pause
+    It is built on top of mautrix-python, which is a powerful Python Matrix
+    library that underpins all of the mautrix bridges including the Telegram,
+    Facebook, and Instagram bridges.
+\end{frame}
+
+\begin{frame}{Maubot Admin Panel}
+    I have set up a maubot instance here:
+
+    \begin{center}
+        \Large
+        \url{https://argon.ohea.xyz/_matrix/maubot/}
+    \end{center}
+
+    Username: \texttt{demo} \\
+    Password: \texttt{matrixiscool}
+\end{frame}
+
+\begin{frame}[fragile]{General bot-writing workflow}
+    \textbf{Documentation:}
+    \url{https://docs.mau.fi/maubot/dev/getting-started.html}
+
+    \bigskip
+
+    \textbf{Install maubot} on your local machine:
+    \begin{minted}{shell}
+    pip3 install --user maubot
+    \end{minted}
+
+    \textbf{Writing your bot:}
+    \begin{itemize}
+        \item Run \texttt{mbc init} for interactive plugin creation.
+        \item Run \texttt{mbc login} to connect to the maubot instance.
+        \item After you write your code, upload it to the server with: \\
+            \texttt{mbc build --upload}
+        \item Create a user for a client: \\
+            \texttt{mbc auth --register --homeserver argon.ohea.xyz --server argon}
+        \item Create a client and instance on the Maubot Manager.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[standout]
+    \Huge
+    Example: Echobot
+\end{frame}
+
+\begin{frame}[standout]
+    \Huge
+    Example: Firefighter bot
+\end{frame}
+
+\begin{frame}{Bot Ideas}
+    \textbf{Now it's your turn!} We recommend you start with something small (an
+    existing bot for example), then build up from there.
+
+    \begin{itemize}
+        \item Try writing a cooler echobot or a better reaction bot.
+        \item A bot that sends back ASCII-art of the given word or phrase.
+        \item A bot that applies a filter to images sent in a room.
+        \item A 20 questions bot.
+        \item A dice roll bot
+        \item Welcome bot that says hi to new users.
+        \item Upvote/downvote tracker bot that tracks the number of thumbs up
+            and thumbs down emojis that each user gets.
+        \item Any other ideas?
+    \end{itemize}
+\end{frame}
+
+\end{document}
+% Local Variables:
+% TeX-command-extra-options: "-shell-escape"
+% End:
